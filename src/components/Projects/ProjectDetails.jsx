@@ -183,7 +183,7 @@ const ProjectDetails = ({ open, handleClose, project }) => {
             <Button
               variant="contained"
               color="success"
-              href={project.demoLink}
+              href={project.liveDemo}
               target="_blank"
               rel="noopener noreferrer"
               fullWidth={isSmallScreen}
@@ -195,7 +195,7 @@ const ProjectDetails = ({ open, handleClose, project }) => {
             <Button
               variant="contained"
               color="primary"
-              href={project.githubLink}
+              href={project.github}
               target="_blank"
               rel="noopener noreferrer"
               fullWidth={isSmallScreen}

@@ -181,7 +181,7 @@ const Home = () => {
           >
             {name}
           </Typography>
-          <Typography variant="body1" sx={{ color: "gray", mb: 4, fontSize: { xs: "0.9rem", md: "1rem" } }}>
+          <Typography variant="body1" sx={{ color: "#fff", mb: 4, fontSize: { xs: "0.9rem", md: "1rem" } }}>
             {description}
           </Typography>
           <Box sx={{ display: "flex", gap: 2, justifyContent: { xs: "center", md: "flex-start" } }}>

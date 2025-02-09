@@ -43,6 +43,7 @@
 //               background: "linear-gradient(to top, #00D1FF, transparent)",
 //             }}
 //           />
+          
 //         </Box>
 
 //         {/* Right Side - Text on Desktop, Above Model on Mobile */}
@@ -99,6 +100,10 @@
 
 // export default About;
 
+
+
+/******************************model color add******************* */
+
 import React from "react";
 import { Box, Typography, Container } from "@mui/material";
 import model from "../images/model.png";
@@ -129,11 +134,11 @@ const About = () => {
             justifyContent: "center",
             alignItems: "center",
             order: { xs: 2, md: 1 },
-            mt: { xs: 4, md: 0 }, // Adds spacing for mobile view
             width: "100%",
             maxWidth: "280px",
             borderRadius: "31% 21% 0% 0% / 25% 25% 21% 25%",
-            overflow: "hidden", // Prevents gradient from overflowing
+            overflow: "hidden",
+            margin: { xs: "0 auto", md: 0 }, // Center on mobile
           }}
         >
           {/* Image */}
@@ -154,7 +159,7 @@ const About = () => {
               bottom: 0,
               left: 0,
               width: "100%",
-              height: "100%", // Adjust as needed
+              height: "100%",
               background: "linear-gradient(to top, #00D1FF , transparent)",
             }}
           />
@@ -182,7 +187,7 @@ const About = () => {
           <Typography
             variant="body1"
             sx={{
-              color: "gray",
+              color: "#fff",
               mb: 3,
               fontSize: { xs: "0.9rem", md: "1rem" },
             }}
@@ -191,7 +196,7 @@ const About = () => {
           </Typography>
           <Typography
             variant="body1"
-            sx={{ color: "gray", fontSize: { xs: "0.9rem", md: "1rem" } }}
+            sx={{ color: "#fff", fontSize: { xs: "0.9rem", md: "1rem" } }}
           >
             {skills}
           </Typography>
