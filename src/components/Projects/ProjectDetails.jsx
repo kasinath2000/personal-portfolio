@@ -1,5 +1,4 @@
 
-
 // import React from "react";
 // import { Box, Typography, Modal, IconButton, Button, Chip } from "@mui/material";
 // import { X } from "lucide-react";
@@ -62,8 +61,8 @@
 //           </Box>
 //         )}
 
-//         {/* Action Buttons Aligned on Same Line */}
-//         <Box display="flex"  gap={2} mt={3}>
+//         {/* Action Buttons */}
+//         <Box display="flex" gap={2} mt={3}>
 //           {project.demoLink && (
 //             <Button
 //               variant="contained"
@@ -90,6 +89,7 @@
 //             variant="outlined"
 //             color="error"
 //             onClick={handleClose}
+//             sx={{ flexGrow: project.demoLink || project.githubLink ? 0 : 1 }}
 //           >
 //             Close
 //           </Button>
@@ -103,11 +103,16 @@
 
 
 
+
+
+
 import React from "react";
-import { Box, Typography, Modal, IconButton, Button, Chip } from "@mui/material";
+import { Box, Typography, Modal, IconButton, Button, Chip, useMediaQuery } from "@mui/material";
 import { X } from "lucide-react";
 
 const ProjectDetails = ({ open, handleClose, project }) => {
+  const isSmallScreen = useMediaQuery("(max-width:600px)");
+
   if (!project) return null;
 
   return (
@@ -117,11 +122,13 @@ const ProjectDetails = ({ open, handleClose, project }) => {
           backgroundColor: "#00242C",
           color: "#FFFFFF",
           p: 4,
-          maxWidth: 600,
+          maxWidth: isSmallScreen ? "90%" : 600,
           mx: "auto",
-          mt: 8,
+          mt: isSmallScreen ? "20vh" : 8,
           borderRadius: "12px",
           position: "relative",
+          maxHeight: "80vh",
+          overflowY: "auto",
         }}
       >
         {/* Close Icon */}
@@ -166,7 +173,12 @@ const ProjectDetails = ({ open, handleClose, project }) => {
         )}
 
         {/* Action Buttons */}
-        <Box display="flex" gap={2} mt={3}>
+        <Box
+          display="flex"
+          flexDirection={isSmallScreen ? "column" : "row"}
+          gap={2}
+          mt={3}
+        >
           {project.demoLink && (
             <Button
               variant="contained"
@@ -174,6 +186,7 @@ const ProjectDetails = ({ open, handleClose, project }) => {
               href={project.demoLink}
               target="_blank"
               rel="noopener noreferrer"
+              fullWidth={isSmallScreen}
             >
               Live Demo
             </Button>
@@ -185,6 +198,7 @@ const ProjectDetails = ({ open, handleClose, project }) => {
               href={project.githubLink}
               target="_blank"
               rel="noopener noreferrer"
+              fullWidth={isSmallScreen}
             >
               GitHub Link
             </Button>
@@ -193,7 +207,7 @@ const ProjectDetails = ({ open, handleClose, project }) => {
             variant="outlined"
             color="error"
             onClick={handleClose}
-            sx={{ flexGrow: project.demoLink || project.githubLink ? 0 : 1 }}
+            fullWidth={isSmallScreen}
           >
             Close
           </Button>

@@ -5,7 +5,6 @@ import { Box, Typography, Container } from "@mui/material";
 import model from "../images/model.png";
 
 const About = () => {
-  // Dynamic content
   const title = "About Me";
   const intro =
     "Hi, I'm a dedicated web developer passionate about creating interactive, user-friendly, and visually appealing web applications. My goal is to build products that deliver a great experience.";
@@ -19,48 +18,79 @@ const About = () => {
         sx={{
           display: "grid",
           gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
-          gap: 4,
+          gap: { xs: 4, md: 6 },
           alignItems: "center",
         }}
       >
-        {/* Left Side - Model Box with Gradient */}
+        {/* Left Side - Model on Desktop, Below Text on Mobile */}
         <Box
           sx={{
-            position: "relative",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            width: "100%",
-            backgroundColor: "#00242C", // Optional, in case you want to keep the background in sync with the section color
-            padding: "10px",
-            borderRadius: '31% 21% 0% 0% / 25% 25% 21% 25%'
+            order: { xs: 2, md: 1 },
+            mt: { xs: 4, md: 0 }, // Adds spacing for mobile view
           }}
         >
-          {/* Model Image with Background and Custom Border Radius */}
           <img
             src={model}
             alt="About Me"
             style={{
-              width: "280px",
+              width: "100%",
+              maxWidth: "280px",
               height: "auto",
-              borderRadius: '31% 21% 0% 0% / 25% 25% 21% 25%',
-              background: "linear-gradient(to top, #00D1FF, transparent)", // Gradient background
-              position: "relative",
+              borderRadius: "31% 21% 0% 0% / 25% 25% 21% 25%",
+              background: "linear-gradient(to top, #00D1FF, transparent)",
             }}
           />
         </Box>
 
-        {/* Right Side - Text Content */}
-        <Box sx={{ color: "white", textAlign: { xs: "center", md: "left" } }}>
-          <Typography variant="h4" sx={{ fontWeight: "bold", color: "#00D1FF", mb: 2 }}>
+        {/* Right Side - Text on Desktop, Above Model on Mobile */}
+        <Box
+          sx={{
+            color: "white",
+            textAlign: { xs: "center", md: "left" },
+            order: { xs: 1, md: 2 },
+          }}
+        >
+          <Typography
+            variant="h4"
+            sx={{
+              fontWeight: "bold",
+              color: "#00D1FF",
+              mb: 2,
+              fontSize: { xs: "1.8rem", md: "2.5rem" },
+            }}
+          >
             {title}
           </Typography>
-          <Typography variant="body1" sx={{ color: "gray", mb: 3 }}>
+          <Typography
+            variant="body1"
+            sx={{
+              color: "gray",
+              mb: 3,
+              fontSize: { xs: "0.9rem", md: "1rem" },
+            }}
+          >
             {intro}
           </Typography>
-          <Typography variant="body1" sx={{ color: "gray" }}>
+          <Typography
+            variant="body1"
+            sx={{ color: "gray", fontSize: { xs: "0.9rem", md: "1rem" } }}
+          >
             {skills}
           </Typography>
+
+          {/* Horizontal Line Under Text - Hidden on Small Screens */}
+          <Box
+            sx={{
+              height: "2px",
+              backgroundColor: "#00D1FF",
+              width: "80px",
+              margin: "1.5rem auto 0",
+              display: { xs: "none", md: "block" },
+            }}
+          />
         </Box>
       </Container>
     </Box>
