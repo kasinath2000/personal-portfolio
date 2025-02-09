@@ -96,6 +96,13 @@
 
 
 
+
+
+
+
+
+
+
 // import React, { useEffect, useState, useRef } from "react";
 // import { Box, IconButton, Drawer } from "@mui/material";
 // import { Link as ScrollLink } from "react-scroll";
@@ -110,7 +117,7 @@
 //   const [mobileOpen, setMobileOpen] = useState(false);
 //   const sectionRefs = useRef({});
 //   const theme = useTheme();
-//   const isMobile = useMediaQuery(theme.breakpoints.down("md")); // Detects screen width below medium (960px)
+//   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
 //   useEffect(() => {
 //     navItemsData.forEach((item) => {
@@ -204,22 +211,38 @@
 //       )}
 
 //       {/* Mobile Drawer */}
-//       <Drawer anchor="right" open={mobileOpen} onClose={toggleDrawer}>
+//       <Drawer
+//         anchor="right"
+//         open={mobileOpen}
+//         onClose={toggleDrawer}
+//         PaperProps={{
+//           sx: {
+//             width: "200px", // Set drawer width
+//             height: "50vh", // Set drawer height to 90% of viewport
+//             marginTop: "70px", // Add top margin for spacing
+//             backgroundColor: "#0d1b2a", // Dark theme background
+//             color: "#F8F5E9",
+//             borderTopLeftRadius: "20px",
+//             borderBottomLeftRadius: "20px",
+//             boxShadow: "0px 4px 10px rgba(0, 209, 255, 0.2)",
+//           },
+//         }}
+//       >
 //         <Box
 //           sx={{
-//             width: 250,
 //             height: "100%",
-//             backgroundColor: "#0d1b2a",
-//             color: "#F8F5E9",
 //             display: "flex",
 //             flexDirection: "column",
 //             alignItems: "center",
 //             paddingTop: "20px",
 //           }}
 //         >
+//           {/* Close Button */}
 //           <IconButton onClick={toggleDrawer} sx={{ color: "#F8F5E9", alignSelf: "flex-end", marginRight: 2 }}>
 //             <CloseIcon fontSize="large" />
 //           </IconButton>
+
+//           {/* Navigation Links */}
 //           {navItemsData.map((item) => (
 //             <ScrollLink
 //               key={item.id}
@@ -228,13 +251,13 @@
 //               duration={500}
 //               spy={true}
 //               offset={-80}
-//               onClick={toggleDrawer} // Close drawer when a link is clicked
+//               onClick={toggleDrawer}
 //               style={{
 //                 color: activeSection === item.link ? "#FFD700" : "#F8F5E9",
 //                 textDecoration: "none",
 //                 fontWeight: "bold",
 //                 fontSize: "18px",
-//                 margin: "10px 0",
+//                 margin: "15px 0",
 //                 cursor: "pointer",
 //               }}
 //             >
@@ -248,15 +271,6 @@
 // };
 
 // export default Navbar;
-
-
-
-
-
-
-
-
-
 
 
 
@@ -360,10 +374,10 @@ const Navbar = () => {
         </Box>
       )}
 
-      {/* Mobile Menu Button */}
+      {/* Mobile Menu Button - Toggle Between Hamburger & Close Icon */}
       {isMobile && (
         <IconButton onClick={toggleDrawer} sx={{ color: "#F8F5E9" }}>
-          <MenuIcon fontSize="large" />
+          {mobileOpen ? <CloseIcon fontSize="large" /> : <MenuIcon fontSize="large" />}
         </IconButton>
       )}
 
@@ -374,14 +388,15 @@ const Navbar = () => {
         onClose={toggleDrawer}
         PaperProps={{
           sx: {
-            width: "220px", // Set drawer width
-            height: "90vh", // Set drawer height to 90% of viewport
-            marginTop: "10px", // Add top margin for spacing
-            backgroundColor: "#0d1b2a", // Dark theme background
+            width: "150px",
+            height: "45vh",
+            top: "70px",
+            // marginTop: "70px",
+            backgroundColor: "#0d1b2a",
             color: "#F8F5E9",
             borderTopLeftRadius: "20px",
             borderBottomLeftRadius: "20px",
-            boxShadow: "0px 4px 10px rgba(0, 209, 255, 0.2)",
+            boxShadow: "0px 2px 5px rgba(0, 209, 255, 0.2)",
           },
         }}
       >
@@ -394,11 +409,6 @@ const Navbar = () => {
             paddingTop: "20px",
           }}
         >
-          {/* Close Button */}
-          <IconButton onClick={toggleDrawer} sx={{ color: "#F8F5E9", alignSelf: "flex-end", marginRight: 2 }}>
-            <CloseIcon fontSize="large" />
-          </IconButton>
-
           {/* Navigation Links */}
           {navItemsData.map((item) => (
             <ScrollLink
@@ -413,7 +423,7 @@ const Navbar = () => {
                 color: activeSection === item.link ? "#FFD700" : "#F8F5E9",
                 textDecoration: "none",
                 fontWeight: "bold",
-                fontSize: "18px",
+                fontSize: "15px",
                 margin: "15px 0",
                 cursor: "pointer",
               }}
