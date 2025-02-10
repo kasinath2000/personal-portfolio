@@ -192,52 +192,48 @@
 
 // export default Projects;
 
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Box, Container, Grid, Typography, Button, Chip } from "@mui/material";
+import { Box, Container, Grid, Typography, Button } from "@mui/material";
 import ProjectCard from "../UI/ProjectCard";
 import ProjectDetails from "./ProjectDetails";
-import SkeletonLoading from "../UI/SkeletonLoading"; // Import the SkeletonLoading component
+import SkeletonLoading from "../UI/SkeletonLoading";
+import ProjectsDrawer from "../UI/ProjectsDrawer"; 
 import defultImage from "../images/defult.png";
 import OthersProjects from "./OthersProjects";
 const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showAllProjects, setShowAllProjects] = useState(false);
-  const [projectList, setProjectList] = useState([]); // Stores fetched project data
-  const [loading, setLoading] = useState(true); // Tracks loading state
+  const [projectList, setProjectList] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false); // Drawer state
 
-  const url = import.meta.env.VITE_PROJECTS_API_URL; // Using the URL from .env
-
-  // Function to fetch project data using axios
-  const fetchProjects = async () => {
-    setLoading(true); // Set loading state to true when starting request
-
-    try {
-      const response = await axios.get(url);
-      const projects = response.data.data || [];
-      setProjectList(projects); // Set the project list in state
-    } catch (error) {
-      console.error("Error fetching project data:", error);
-    } finally {
-      setLoading(false); // Set loading state to false after the data is fetched
-    }
-  };
+  const url = import.meta.env.VITE_PROJECTS_API_URL;
 
   useEffect(() => {
-    fetchProjects(); // Fetch projects only once on component mount
-  }, []); // Empty dependency array ensures it runs only once
-
-  // Function to handle opening the project modal with details
-  const handleOpenModal = (project) => {
-    const projectWithArrayTechnologies = {
-      ...project,
-      technologies: project.technologies
-        ? project.technologies.split(", ")
-        : [],
+    const fetchProjects = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get(url);
+        setProjectList(response.data.data || []);
+      } catch (error) {
+        console.error("Error fetching project data:", error);
+      } finally {
+        setLoading(false);
+      }
     };
-    setSelectedProject(projectWithArrayTechnologies); // Set selected project in state
-    setIsModalOpen(true); // Open the modal
+
+    fetchProjects();
+  }, []);
+
+  const handleOpenModal = (project) => {
+    setSelectedProject({
+      ...project,
+      technologies: project.technologies ? project.technologies.split(", ") : [],
+    });
+    setIsModalOpen(true);
   };
 
   const handleCloseModal = () => {
@@ -266,25 +262,28 @@ const Projects = () => {
           Here are some of the projects I’ve worked on. They showcase my skills
           and experience in web development.
         </Typography>
-        {/* Chips Section */}
+
+        {/* Chip to Open Drawer */}
         {/* <Box textAlign="center" mb={4}>
           <Chip
-            label="See my Small Projects"
+            label="See my Another Projects"
             sx={{
               backgroundColor: "#004e5f",
               color: "#00D1FF",
-              fontSize: "12px", // Smaller font size
+              fontSize: "12px",
               px: 2,
               py: 0.5,
+              cursor: "pointer",
             }}
+            onClick={() => setIsDrawerOpen(true)}
           />
         </Box> */}
-<OthersProjects />
-        {/* Loading Indicator - using SkeletonLoading component */}
+        {/* <OthersProjects/> */}
+
+        {/* Loading Indicator */}
         {loading ? (
-          <SkeletonLoading count={6} /> // You can specify the number of skeletons here
+          <SkeletonLoading count={6} />
         ) : (
-          // Project Cards Layout when not loading
           <Grid container spacing={4} justifyContent="center">
             {projectList
               .slice(0, showAllProjects ? projectList.length : 6)
@@ -294,11 +293,7 @@ const Projects = () => {
                     title={project.title}
                     description={project.description}
                     image={project.image || defultImage}
-                    technologies={
-                      project.technologies
-                        ? project.technologies.split(", ")
-                        : []
-                    } // Convert technologies string into an array
+                    technologies={project.technologies ? project.technologies.split(", ") : []}
                     onSeeMoreClick={() => handleOpenModal(project)}
                   />
                 </Grid>
@@ -320,19 +315,16 @@ const Projects = () => {
               }}
               onClick={() => setShowAllProjects(!showAllProjects)}
             >
-              {showAllProjects
-                ? "Show Less Projects.."
-                : "Show More Projects.."}
+              {showAllProjects ? "Show Less Projects.." : "Show More Projects.."}
             </Button>
           </Box>
         )}
 
-        {/* Modal for displaying project details */}
-        <ProjectDetails
-          open={isModalOpen}
-          handleClose={handleCloseModal}
-          project={selectedProject}
-        />
+        {/* Modal for Project Details */}
+        <ProjectDetails open={isModalOpen} handleClose={handleCloseModal} project={selectedProject} />
+
+        {/* Drawer for More Projects */}
+        <ProjectsDrawer open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)} projects={projectList} />
       </Container>
     </Box>
   );

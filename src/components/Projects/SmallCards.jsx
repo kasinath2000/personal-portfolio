@@ -75,7 +75,6 @@
 
 // export default SmallCards;
 
-
 import React from "react";
 import { Box, Card, CardContent, CardMedia, Typography, Button } from "@mui/material";
 
@@ -90,8 +89,8 @@ const SmallCards = ({ title, description, image, onSeeMoreClick, technologies })
         boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.15)",
         transition: "transform 0.15s ease-in-out",
         "&:hover": { transform: "scale(1.02)" },
-        width: 200,
-        height: 260,
+        width: 250, // Increase width to 250px
+        height: 300, // Increase height to 300px
       }}
     >
       <CardMedia
@@ -99,14 +98,14 @@ const SmallCards = ({ title, description, image, onSeeMoreClick, technologies })
         image={image}
         alt={title}
         sx={{
-          height: 100,
+          height: 150, // Increased height of image
           width: "100%",
           objectFit: "cover",
           borderTopLeftRadius: "8px",
           borderTopRightRadius: "8px",
         }}
       />
-      <CardContent sx={{ padding: "8px" }}>
+      <CardContent sx={{ padding: "16px" }}>
         <Typography variant="subtitle2" component="div" noWrap>
           {title}
         </Typography>
@@ -120,13 +119,13 @@ const SmallCards = ({ title, description, image, onSeeMoreClick, technologies })
             overflow: "hidden",
             textOverflow: "ellipsis",
             WebkitLineClamp: 2,
-            fontSize: "12px",
+            fontSize: "14px", // Adjust font size for better readability
           }}
         >
           {description}
         </Typography>
 
-        <Typography variant="body2" color="text.secondary" sx={{ mt: 0.5, fontSize: "12px" }}>
+        <Typography variant="body2" color="text.secondary" sx={{ mt: 1, fontSize: "14px" }}>
           <strong>Technologies:</strong> {technologies.join(", ")}
         </Typography>
 
@@ -139,8 +138,8 @@ const SmallCards = ({ title, description, image, onSeeMoreClick, technologies })
               border: "3px solid #00242C",
               borderRadius: "6px",
               textTransform: "capitalize",
-              paddingX: 1,
-              fontSize: "10px",
+              paddingX: 1.5,
+              fontSize: "12px", // Slightly larger font size
             }}
             onClick={onSeeMoreClick}
           >
