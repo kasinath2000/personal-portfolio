@@ -179,7 +179,7 @@ const ProjectDetails = ({ open, handleClose, project }) => {
           gap={2}
           mt={3}
         >
-          {project.demoLink && (
+          {project.liveDemo && (
             <Button
               variant="contained"
               color="success"
@@ -191,7 +191,7 @@ const ProjectDetails = ({ open, handleClose, project }) => {
               Live Demo
             </Button>
           )}
-          {project.githubLink && (
+          {project.github && (
             <Button
               variant="contained"
               color="primary"
