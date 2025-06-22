@@ -3,6 +3,7 @@
     { "id": 2, "label": "About", "link": "#about" },
     { "id": 3, "label": "Skills", "link": "#skills" },
     { "id": 4, "label": "Projects", "link": "#projects" },
-    { "id": 5, "label": "Contact", "link": "#contact" }
+    { "id": 5, "label": "Education", "link": "#education" },
+    { "id": 6, "label": "Contact", "link": "#contact" }
   ]
   
