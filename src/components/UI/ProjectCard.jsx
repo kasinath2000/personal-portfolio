@@ -32,7 +32,7 @@ const ProjectCard = ({ title, description, image, onSeeMoreClick, technologies }
           image={image}
           alt={title}
           sx={{
-            height: 180,
+            height: 160,
             width: "100%",
             objectFit: "cover",
             borderRadius: "12px",
@@ -40,7 +40,7 @@ const ProjectCard = ({ title, description, image, onSeeMoreClick, technologies }
         />
       </Box>
       <CardContent>
-        <Typography variant="h5" component="div" gutterBottom>
+        <Typography variant="h5" sx={{ fontSize: "1.3rem", fontWeight: "bold", color: "#131D4F" }}  component="div" gutterBottom>
           {title}
         </Typography>
 
@@ -68,7 +68,7 @@ const ProjectCard = ({ title, description, image, onSeeMoreClick, technologies }
             size="medium"
             variant="outlined"
             sx={{
-            //   backgroundColor: "#00242C",
+              // backgroundColor: "#00242C",
               color: "blue",
               border: "2px solid #FFFFFF",
               borderRadius: "8px",

@@ -363,6 +363,7 @@ const Skills = () => {
                               width: "60%",
                               height: "60%",
                               objectFit: "contain",
+
                             }}
                           />
                         </Box>

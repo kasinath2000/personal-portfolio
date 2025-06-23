@@ -1,10 +1,16 @@
 
+
 import React, { useEffect, useState, useRef } from "react";
-import { Box, IconButton, Drawer } from "@mui/material";
+import {
+  Box,
+  IconButton,
+  Drawer,
+  useTheme,
+  useMediaQuery,
+} from "@mui/material";
 import { Link as ScrollLink } from "react-scroll";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-import { useTheme, useMediaQuery } from "@mui/material";
 import navItemsData from "../data/navItems.json";
 import NavLogo from "../assets/NavLogo.svg";
 
@@ -17,8 +23,8 @@ const Navbar = () => {
 
   useEffect(() => {
     navItemsData.forEach((item) => {
-      const sectionId = item.link.substring(1);
-      sectionRefs.current[sectionId] = document.getElementById(sectionId);
+      const id = item.link.substring(1);
+      sectionRefs.current[id] = document.getElementById(id);
     });
 
     const observer = new IntersectionObserver(
@@ -43,9 +49,7 @@ const Navbar = () => {
     return () => observer.disconnect();
   }, []);
 
-  const toggleDrawer = () => {
-    setMobileOpen(!mobileOpen);
-  };
+  const toggleDrawer = () => setMobileOpen((prev) => !prev);
 
   return (
     <Box
@@ -58,14 +62,11 @@ const Navbar = () => {
         backgroundColor: "rgba(0, 209, 255, 0.4)",
         backdropFilter: "blur(10px)",
         boxShadow: "0 2px 10px rgba(0, 209, 255, 0.2)",
-        padding: "10px 5rem",
+        padding: { xs: "10px 2rem", md: "10px 5rem" },
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
         transition: "0.3s",
-        [theme.breakpoints.down("md")]: {
-          padding: "10px 2rem",
-        },
       }}
     >
       {/* Logo */}
@@ -73,16 +74,16 @@ const Navbar = () => {
         <img src={NavLogo} alt="Logo" style={{ height: "40px" }} />
       </Box>
 
-      {/* Desktop Navbar */}
+      {/* Desktop Nav */}
       {!isMobile && (
         <Box sx={{ display: "flex", gap: 4 }}>
           {navItemsData.map((item) => (
             <ScrollLink
               key={item.id}
               to={item.link.substring(1)}
-              smooth={true}
+              smooth
               duration={500}
-              spy={true}
+              spy
               offset={-80}
               style={{
                 color: activeSection === item.link ? "#FFD700" : "#F8F5E9",
@@ -99,7 +100,7 @@ const Navbar = () => {
         </Box>
       )}
 
-      {/* Mobile Menu Button - Toggle Between Hamburger & Close Icon */}
+      {/* Mobile Menu Icon */}
       {isMobile && (
         <IconButton onClick={toggleDrawer} sx={{ color: "#F8F5E9" }}>
           {mobileOpen ? <CloseIcon fontSize="large" /> : <MenuIcon fontSize="large" />}
@@ -113,14 +114,13 @@ const Navbar = () => {
         onClose={toggleDrawer}
         PaperProps={{
           sx: {
-            width: "150px",
+            width: 150,
             height: "45vh",
             top: "70px",
-            // marginTop: "70px",
             backgroundColor: "#0d1b2a",
             color: "#F8F5E9",
-            borderTopLeftRadius: "20px",
-            borderBottomLeftRadius: "20px",
+            borderTopLeftRadius: 2,
+            borderBottomLeftRadius: 2,
             boxShadow: "0px 2px 5px rgba(0, 209, 255, 0.2)",
           },
         }}
@@ -131,17 +131,16 @@ const Navbar = () => {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            paddingTop: "20px",
+            paddingTop: 2,
           }}
         >
-          {/* Navigation Links */}
           {navItemsData.map((item) => (
             <ScrollLink
               key={item.id}
               to={item.link.substring(1)}
-              smooth={true}
+              smooth
               duration={500}
-              spy={true}
+              spy
               offset={-80}
               onClick={toggleDrawer}
               style={{

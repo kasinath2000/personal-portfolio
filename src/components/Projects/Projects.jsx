@@ -1,27 +1,49 @@
-// import React, { useState } from "react";
+
+
+// import React, { useState, useEffect } from "react";
+// import axios from "axios";
 // import { Box, Container, Grid, Typography, Button } from "@mui/material";
 // import ProjectCard from "../UI/ProjectCard";
 // import ProjectDetails from "./ProjectDetails";
+// import SkeletonLoading from "../UI/SkeletonLoading";
+// import ProjectsDrawer from "../UI/ProjectsDrawer"; 
+// import defultImage from "../images/defult.png";
+// import projectTags from "../data/projectTags";
+// import Chips from "../UI/Chips";
+// import Drawers from "../UI/Drawers";
+
 
 // const Projects = () => {
 //   const [selectedProject, setSelectedProject] = useState(null);
 //   const [isModalOpen, setIsModalOpen] = useState(false);
 //   const [showAllProjects, setShowAllProjects] = useState(false);
+//   const [projectList, setProjectList] = useState([]);
+//   const [loading, setLoading] = useState(true);
+//   const [isDrawerOpen, setIsDrawerOpen] = useState(false); // Drawer state
 
-//    let url="https://script.google.com/macros/s/AKfycbwdqGbEZKa5wSgxdK7fq--6JBkuv9gLK7EnseWMYSNkrc14nxHoYB7ZSYjy1h5KY8lE9g/exec";
+//   const url = import.meta.env.VITE_PROJECTS_API_URL;
 
-//   const projectList = [
-//     { title: "Project 1", description: "lorem ipsum dolor sit amet...", technologies: ["React", "Material UI", "Node.js"], image: "/img/project.png", demoLink: "https://example.com/project1", githubLink: "https://github.com/user/project1" },
-//     { title: "Project 2", description: "lorem ipsum dolor sit amet...", technologies: ["JavaScript", "Bootstrap", "API Integration"], image: "/img/project.png", demoLink: "https://example.com/project2", githubLink: "https://github.com/user/project2" },
-//     { title: "Project 3", description: "lorem ipsum dolor sit amet...", technologies: ["MongoDB", "Express.js", "Redux"], image: "/img/project.png", demoLink: "https://example.com/project3", githubLink: "https://github.com/user/project3" },
-//     { title: "Project 4", description: "lorem ipsum dolor sit amet...", technologies: ["MongoDB", "Express.js", "Redux"], image: "/img/project.png", demoLink: "https://example.com/project4", githubLink: "https://github.com/user/project4" },
-//     { title: "Project 5", description: "lorem ipsum dolor sit amet...", technologies: ["MongoDB", "Express.js", "Redux"], image: "/img/project.png", demoLink: "https://example.com/project5", githubLink: "https://github.com/user/project5" },
-//     { title: "Project 6", description: "lorem ipsum dolor sit amet...", technologies: ["MongoDB", "Express.js", "Redux"], image: "/img/project.png", demoLink: "https://example.com/project6", githubLink: "https://github.com/user/project6" },
-//     { title: "Project 7", description: "lorem ipsum dolor sit amet...", technologies: ["MongoDB", "Express.js", "Redux"], image: "/img/project.png", demoLink: "https://example.com/project7", githubLink: "https://github.com/user/project7" },
-//   ];
+//   useEffect(() => {
+//     const fetchProjects = async () => {
+//       setLoading(true);
+//       try {
+//         const response = await axios.get(url);
+//         setProjectList(response.data.data || []);
+//       } catch (error) {
+//         console.error("Error fetching project data:", error);
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+
+//     fetchProjects();
+//   }, []);
 
 //   const handleOpenModal = (project) => {
-//     setSelectedProject(project);
+//     setSelectedProject({
+//       ...project,
+//       technologies: project.technologies ? project.technologies.split(", ") : [],
+//     });
 //     setIsModalOpen(true);
 //   };
 
@@ -33,134 +55,45 @@
 //   return (
 //     <Box id="projects" sx={{ backgroundColor: "#00242C", py: 8 }}>
 //       <Container maxWidth="lg">
-//         <Typography variant="h3" sx={{ color: "#00D1FF", fontWeight: "bold", textAlign: "center", mb: 4 }}>
+//         <Typography
+//           variant="h3"
+//           sx={{
+//             color: "#00D1FF",
+//             fontWeight: "bold",
+//             textAlign: "center",
+//             mb: 4,
+//           }}
+//         >
 //           My Projects
 //         </Typography>
-//         <Typography variant="body1" sx={{ color: "gray", textAlign: "center", mb: 8 }}>
-//           Here are some of the projects I’ve worked on. They showcase my skills and experience in web development.
+//         <Typography
+//           variant="body1"
+//           sx={{ color: "gray", textAlign: "center", mb: 8 }}
+//         >
+//           Here are some of the projects I’ve worked on. They showcase my skills
+//           and experience in web development.
 //         </Typography>
 
-//         {/* Project Cards Layout */}
-//         <Grid container spacing={4} justifyContent="center">
-//           {projectList.slice(0, showAllProjects ? projectList.length : 6).map((project, index) => (
-//             <Grid item xs={12} sm={6} md={4} key={index}>
-//               <ProjectCard
-//                 title={project.title}
-//                 description={project.description}
-//                 image={project.image}
-//                 technologies={project.technologies}
-//                 onSeeMoreClick={() => handleOpenModal(project)}
-//               />
-//             </Grid>
-//           ))}
-//         </Grid>
+//         {/* add some chip like frontend,backend,fullstack,react,ML ::- clickeble chip but this chip click to open drawer  */}
 
-//         {/* Show More Button */}
-//         <Box textAlign="center" mt={4}>
-//           <Button
-//             sx={{
-//               border: "2px solid #00D1FF",
-//               color: "#00D1FF",
-//               px: 3,
-//               py: 1,
-//               borderRadius: "8px",
-//               "&:hover": { backgroundColor: "#00D1FF", color: "black" },
-//             }}
-//             onClick={() => setShowAllProjects(!showAllProjects)}
-//           >
-//             {showAllProjects ? "Show Less Projects.." : "Show More Projects.."}
-//           </Button>
-//         </Box>
-
-//         <ProjectDetails open={isModalOpen} handleClose={handleCloseModal} project={selectedProject} />
-//       </Container>
-//     </Box>
-//   );
-// };
-
-// export default Projects;
-
-// import React, { useState, useEffect } from "react";
-// import axios from "axios";
-// import { Box, Container, Grid, Typography, Button } from "@mui/material";
-// import ProjectCard from "../UI/ProjectCard";
-// import ProjectDetails from "./ProjectDetails";
-// import SkeletonLoading from "../UI/SkeletonLoading";  // Import the SkeletonLoading component
-
-// const Projects = () => {
-//   // State to store project data, selected project for modal, loading states, etc.
-//   const [selectedProject, setSelectedProject] = useState(null);
-//   const [isModalOpen, setIsModalOpen] = useState(false);
-//   const [showAllProjects, setShowAllProjects] = useState(false);
-//   const [projectList, setProjectList] = useState([]); // Stores fetched project data
-//   const [loading, setLoading] = useState(true); // Tracks loading state
-
-//   const url = "https://script.google.com/macros/s/AKfycbwdqGbEZKa5wSgxdK7fq--6JBkuv9gLK7EnseWMYSNkrc14nxHoYB7ZSYjy1h5KY8lE9g/exec";
-
-//   // Function to fetch project data using axios
-//   const fetchProjects = async () => {
-//     setLoading(true); // Set loading state to true when starting request
-
-//     try {
-//       const response = await axios.get(url);
-//       const projects = response.data.data || [];
-//       setProjectList(projects); // Set the project list in state
-//     } catch (error) {
-//       console.error("Error fetching project data:", error);
-//     } finally {
-//       setLoading(false); // Set loading state to false after the data is fetched
-//     }
-//   };
-
-//   // UseEffect hook to fetch project data when the component mounts
-//   useEffect(() => {
-//     fetchProjects(); // Fetch projects only once on component mount
-//   }, []); // Empty dependency array ensures it runs only once
-
-//   // Function to handle opening the project modal with details
-//   const handleOpenModal = (project) => {
-//     // Ensure technologies is always an array (split by commas if it's a string)
-//     const projectWithArrayTechnologies = {
-//       ...project,
-//       technologies: project.technologies ? project.technologies.split(", ") : [],
-//     };
-//     setSelectedProject(projectWithArrayTechnologies); // Set selected project in state
-//     setIsModalOpen(true); // Open the modal
-//   };
-
-//   // Function to close the modal
-//   const handleCloseModal = () => {
-//     setSelectedProject(null);
-//     setIsModalOpen(false);
-//   };
-
-//   return (
-//     <Box id="projects" sx={{ backgroundColor: "#00242C", py: 8 }}>
-//       <Container maxWidth="lg">
-//         <Typography variant="h3" sx={{ color: "#00D1FF", fontWeight: "bold", textAlign: "center", mb: 4 }}>
-//           My Projects
-//         </Typography>
-//         <Typography variant="body1" sx={{ color: "gray", textAlign: "center", mb: 8 }}>
-//           Here are some of the projects I’ve worked on. They showcase my skills and experience in web development.
-//         </Typography>
-
-//         {/* Loading Indicator - using SkeletonLoading component */}
+//         {/* Loading Indicator */}
 //         {loading ? (
-//           <SkeletonLoading count={6} /> // You can specify the number of skeletons here
+//           <SkeletonLoading count={6} />
 //         ) : (
-//           // Project Cards Layout when not loading
 //           <Grid container spacing={4} justifyContent="center">
-//             {projectList.slice(0, showAllProjects ? projectList.length : 6).map((project, index) => (
-//               <Grid item xs={12} sm={6} md={4} key={index}>
-//                 <ProjectCard
-//                   title={project.title}
-//                   description={project.description}
-//                   image={project.image} // Default image if not provided
-//                   technologies={project.technologies ? project.technologies.split(", ") : []} // Convert technologies string into an array
-//                   onSeeMoreClick={() => handleOpenModal(project)} // Open modal on "See More" click
-//                 />
-//               </Grid>
-//             ))}
+//             {projectList
+//               .slice(0, showAllProjects ? projectList.length : 6)
+//               .map((project, index) => (
+//                 <Grid item xs={12} sm={6} md={4} key={index}>
+//                   <ProjectCard
+//                     title={project.title}
+//                     description={project.description}
+//                     image={project.image || defultImage}
+//                     technologies={project.technologies ? project.technologies.split(", ") : []}
+//                     onSeeMoreClick={() => handleOpenModal(project)}
+//                   />
+//                 </Grid>
+//               ))}
 //           </Grid>
 //         )}
 
@@ -183,8 +116,11 @@
 //           </Box>
 //         )}
 
-//         {/* Modal for displaying project details */}
+//         {/* Modal for Project Details */}
 //         <ProjectDetails open={isModalOpen} handleClose={handleCloseModal} project={selectedProject} />
+
+//         {/* Drawer for More Projects */}
+//         <ProjectsDrawer open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)} projects={projectList} />
 //       </Container>
 //     </Box>
 //   );
@@ -193,22 +129,27 @@
 // export default Projects;
 
 
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Box, Container, Grid, Typography, Button } from "@mui/material";
 import ProjectCard from "../UI/ProjectCard";
 import ProjectDetails from "./ProjectDetails";
 import SkeletonLoading from "../UI/SkeletonLoading";
-import ProjectsDrawer from "../UI/ProjectsDrawer"; 
 import defultImage from "../images/defult.png";
-import OthersProjects from "./OthersProjects";
+import projectTags from "../../data/projectTags";
+import Chips from "../UI/Chips";
+import ProjectsDrawer from "../UI/ProjectsDrawer";
+import FrontendProjects from "../Projects/Frontend/FrontendProjects";
+
 const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showAllProjects, setShowAllProjects] = useState(false);
   const [projectList, setProjectList] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false); // Drawer state
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [selectedTag, setSelectedTag] = useState(null); // Track which chip opened drawer
 
   const url = import.meta.env.VITE_PROJECTS_API_URL;
 
@@ -241,6 +182,11 @@ const Projects = () => {
     setIsModalOpen(false);
   };
 
+  // const handleChipClick = (tag) => {
+  //   setSelectedTag(tag);
+  //   setIsDrawerOpen(true);
+  // };
+
   return (
     <Box id="projects" sx={{ backgroundColor: "#00242C", py: 8 }}>
       <Container maxWidth="lg">
@@ -257,28 +203,17 @@ const Projects = () => {
         </Typography>
         <Typography
           variant="body1"
-          sx={{ color: "gray", textAlign: "center", mb: 8 }}
+          sx={{ color: "gray", textAlign: "center", mb: 4 }}
         >
-          Here are some of the projects I’ve worked on. They showcase my skills
-          and experience in web development.
+          Here are some of the projects I’ve worked on. They showcase my skills and experience in web development.
         </Typography>
 
-        {/* Chip to Open Drawer */}
-        {/* <Box textAlign="center" mb={4}>
-          <Chip
-            label="See my Another Projects"
-            sx={{
-              backgroundColor: "#004e5f",
-              color: "#00D1FF",
-              fontSize: "12px",
-              px: 2,
-              py: 0.5,
-              cursor: "pointer",
-            }}
-            onClick={() => setIsDrawerOpen(true)}
-          />
-        </Box> */}
-        {/* <OthersProjects/> */}
+        {/* Chips */}
+        <Box textAlign="center" display="flex" justifyContent="center" flexWrap="wrap" mb={4}>
+          {projectTags.map((tag, index) => (
+            <Chips key={index} label={tag}  />
+          ))}
+        </Box>
 
         {/* Loading Indicator */}
         {loading ? (
@@ -323,8 +258,16 @@ const Projects = () => {
         {/* Modal for Project Details */}
         <ProjectDetails open={isModalOpen} handleClose={handleCloseModal} project={selectedProject} />
 
-        {/* Drawer for More Projects */}
-        <ProjectsDrawer open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)} projects={projectList} />
+        {/* Drawer for category (dummy items for now) */}
+        {/* <ProjectsDrawer
+          open={isDrawerOpen}
+          onClose={() => setIsDrawerOpen(false)}
+          title={selectedTag}
+        >
+          
+        </ProjectsDrawer> */}
+
+
       </Container>
     </Box>
   );
