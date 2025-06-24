@@ -1,9 +1,8 @@
 export default [
-  "MERN",
-  "React",
-  "Backend",
   "Frontend / Landing Page",
   "Full-Stack",
+  "MERN",
   "API Based",
+  "React",
   "Others",
 ];
