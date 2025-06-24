@@ -1,4 +1,9 @@
-// src/data/projectTags.js
-const projectTags = [ "Frontend", "Backend", "Fullstack", "React", "Others"];
-
-export default projectTags;
+export default [
+  "MERN",
+  "React",
+  "Backend",
+  "Frontend / Landing Page",
+  "Full-Stack",
+  "API Based",
+  "Others",
+];

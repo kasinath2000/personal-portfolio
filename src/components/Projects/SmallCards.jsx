@@ -1,106 +1,17 @@
-import React from "react";
-import {
-  Box,
-  Card,
-  CardContent,
-  CardMedia,
-  Typography,
-  Button,
-} from "@mui/material";
+import React from 'react';
 
-const SmallCards = ({ title, description, image, onSeeMoreClick, technologies }) => {
+const SmallCards = ({ project }) => {
   return (
-    <Card
-      sx={{
-        backgroundColor: "#00D1FF",
-        color: "#00242C",
-        borderRadius: "12px",
-        boxShadow: "0 2px 12px rgba(0, 0, 0, 0.1)",
-        transition: "transform 0.2s ease-in-out",
-        "&:hover": { transform: "scale(1.03)" },
-        height: "100%",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        p: 1,
-      }}
-    >
-      {/* Image */}
-      <CardMedia
-        component="img"
-        image={image}
-        alt={title}
-        sx={{
-          height: 120,
-          width: "100%",
-          objectFit: "cover",
-          borderRadius: "8px",
-        }}
-      />
-
-      {/* Content */}
-      <CardContent sx={{ p: 1 }}>
-        <Typography
-          variant="h6"
-          component="div"
-          sx={{
-            fontSize: "1rem",
-            fontWeight: 600,
-            color: "#131D4F",
-            mb: 0.5,
-          }}
-        >
-          {title}
-        </Typography>
-
-        <Typography
-          variant="body2"
-          color="text.secondary"
-          sx={{
-            fontSize: "0.85rem",
-            display: "-webkit-box",
-            WebkitBoxOrient: "vertical",
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-            WebkitLineClamp: 2,
-            mb: 1,
-          }}
-        >
-          {description}
-        </Typography>
-
-        <Typography
-          variant="caption"
-          color="text.secondary"
-          sx={{ display: "block", fontSize: "0.75rem" }}
-        >
-          <strong>Tech:</strong> {technologies.join(", ")}
-        </Typography>
-
-        <Box mt={1}>
-          <Button
-            size="small"
-            variant="outlined"
-            sx={{
-              color: "#00242C",
-              borderColor: "#00242C",
-              fontSize: "0.75rem",
-              px: 2,
-              py: 0.3,
-              textTransform: "capitalize",
-              borderRadius: "6px",
-              "&:hover": {
-                backgroundColor: "#00242C",
-                color: "#00D1FF",
-              },
-            }}
-            onClick={onSeeMoreClick}
-          >
-            See More
-          </Button>
-        </Box>
-      </CardContent>
-    </Card>
+    <div className="rounded-xl shadow-md bg-white p-4 w-full max-w-md mx-auto">
+      <img src={project.image} alt={project.title} className="rounded-lg w-full h-48 object-cover" />
+      <h2 className="text-xl font-bold mt-4">{project.title}</h2>
+      <p className="text-sm text-gray-600 mt-1">{project.description}</p>
+      <p className="text-sm text-blue-500 mt-2">{project.technologies}</p>
+      <div className="flex gap-4 mt-4">
+        <a href={project.liveDemo} target="_blank" rel="noreferrer" className="text-green-600 underline">Live</a>
+        <a href={project.github} target="_blank" rel="noreferrer" className="text-black underline">GitHub</a>
+      </div>
+    </div>
   );
 };
 
