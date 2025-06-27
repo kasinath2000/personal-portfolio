@@ -700,7 +700,7 @@ const Projects = () => {
       setLoading(true);
       try {
         const response = await axios.get(url);
-        console.log("✅ Full API Response:", response.data);
+        // console.log("✅ Full API Response:", response.data);
 
         const rawData = response.data;
         if (!rawData || typeof rawData !== "object") {
@@ -719,7 +719,7 @@ const Projects = () => {
 
         setProjectList(merged);
       } catch (error) {
-        console.error("❌ Error fetching data:", error);
+        // console.error("❌ Error fetching data:", error);
       } finally {
         setLoading(false);
       }
@@ -802,14 +802,31 @@ const Projects = () => {
 
         {/* Projects List */}
         <Box
+          // sx={{
+          //   minHeight: 400,
+          //   maxHeight: showAllProjects ? "none" : { xs: 1200, sm: 950 },
+          //   overflowY: showAllProjects ? "auto" : "hidden",
+          //   overflowX: "hidden",
+          //   border: "1px solid rgba(0, 209, 255, 0.3)",
+          //   borderRadius: "16px",
+          //   p: 3,
+          //   pt: 4,
+          //   transition: "all 0.4s ease",
+          //   scrollbarWidth: "none",
+          //   "&::-webkit-scrollbar": {
+          //     display: "none",
+          //   },
+          // }}
+
           sx={{
             minHeight: 400,
-            maxHeight: showAllProjects ? "none" : { xs: 1200, sm: 950 },
-            overflowY: showAllProjects ? "auto" : "hidden",
+            maxHeight: showAllProjects ? "none" : isMobile ? 900 : 950,
+            overflowY: "auto",
             overflowX: "hidden",
+            WebkitOverflowScrolling: "touch",
             border: "1px solid rgba(0, 209, 255, 0.3)",
             borderRadius: "16px",
-            p: 3,
+            p: isMobile ? 2 : 3,
             pt: 4,
             transition: "all 0.4s ease",
             scrollbarWidth: "none",
